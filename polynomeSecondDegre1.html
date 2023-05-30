@@ -1,0 +1,118 @@
+<!doctype html>
+<head>
+<style type="text/css">
+body{background-color:lightcyan}
+line{stroke:black}
+circle{fill:red;r:2}
+svg{border:solid 2px blue}
+#italic,#graph{font-style:italic}
+#but,#result{background-color:lightgreen}
+.a{color:red}
+.b{color:blue}
+.c{color:green}
+.d{font-weight:bold}
+h1{text-align:left}
+label,input{margin:3px}
+#def,#Exp,#graph{text-decoration:underline}
+fieldset{
+width: 400px;
+background-color: lightgrey}
+div{
+padding:5px;
+border:solid red 2px;
+width:420px}
+</style>
+<script type="text/javascript">
+function calculDelta() 
+{
+  var a1,b1,c1,X,x1,x2,CD,DC,Fx;
+  //const points=[-5.5,-3.5,-1.5,0.5];
+  a1=parseFloat(f1.a.value);
+  b1=parseFloat(f1.b.value);
+  c1=parseFloat(f1.c.value);
+  const Delta=(b1**2-4*a1*c1);
+  const delta=Delta.toFixed(2);
+  if(delta<0){
+   // document.write("&#8710 = "+delta+" < 0 (negative), no solution !")
+	const racineDelta=Math.sqrt(-Delta);
+	const RacineDelta=racineDelta.toFixed(2);
+	const X1=[(-b1*(2*a1)).toFixed(2),`${((racineDelta)/(2*a1)).toFixed(2)}i`];
+	const X2=[(-b1*(2*a1)).toFixed(2),`${((-racineDelta)/(2*a1)).toFixed(2)}i`];
+	const el= document.getElementById("result");
+    el.innerHTML="&#8710 = "+delta+" < 0 (negative); Solutions X1 is = "+X1[0]+"+"+X1[1]+" and X2 is = "+X2[0]+" "+X2[1];
+  }
+  else{
+   const racineDelta=Math.sqrt(Delta);
+   const RacineDelta=racineDelta.toFixed(2);
+   const X1=(-b1+racineDelta)/(2*a1);
+   x1=X1.toFixed(2);
+   const X2=(-b1-racineDelta)/(2*a1);
+   x2=X2.toFixed(2);
+  X=-b1/(2*a1);
+  Fx=a1*X**2+b1*X+c1;
+  const el= document.getElementById("result");
+  el.innerHTML="&#8710 = "+delta+" > 0 (positive); Solutions X1 is = "+x1+" and X2 is = "+x2+
+  ", La derivee : "+2*a1+"X+"+b1+", elle s'annule au point A (X,Y) = ("+X+","+Fx
+  +") ,"
+  }
+
+  /*if(a1>0){
+    DC =" la fonction est decroisante sur ]-infinie,X], puis croissante [X,+infinie[.";
+    document.write("&#8710 = "+delta+" > 0 (positive); Solutions X1 is = "+x1+" and X2 is = "+x2+
+    ", La derivee : "+2*a1+"X+"+b1+", elle s'annule point A (X,Y) = ("+X+","+Fx
+    +") ,"+DC);
+  }
+  else{
+    CD=" la fonction est croisante sur ]-infinie,X], puis decroissante [X,+infinie[.";
+    document.write("&#8710 = "+delta+" > 0 (positive); Solutions X1 is = "+x1+" and X2 is = "+x2+
+    ", La derivee : "+2*a1+"X+"+b1+", elle s'annule au point A (X,Y) = ("+X+","+Fx
+    +") ,"+CD);
+  }
+ for(number of points){
+    const result=a1*number**2+b1*number+c1;
+    console.log(result)
+  }*/
+
+}
+</script>
+</head>
+<html>
+<body>
+<h1>Maths Polynomial function</h1><hr>
+<p> <span id="def">Definition</span> :</p>
+<div>
+Function f(x) = <span class="a">a</span> X<sup>2</sup> + <span class="b">b</span> X + <span class="c">c</span> with <span class="a">a</span> ,<span class="b">b</span> ,<span class="c">c</span> are a real number,<br> 
+Delta <span class="d">&#8710</span> = <span class="b">b</span><sup>2</sup> - 4<span class="a">a</span><span class="c">c</span>,<br> 
+<span class="d">&#8710</span> > 0 (positive) X<sub>1</sub> = (-<span class="b">b</span> + &#8730<span class="d">&#8710</span>)/(2<span class="a">a</span>), X<sub>2</sub> = (-<span class="b">b</span> - &#8730<span class="d">&#8710</span>)/(2<span class="a">a</span>)<br>
+<span class="d">&#8710</span> < 0 (negative), X<sub>1</sub> = (-<span class="b">b</span> + i&#8730<span class="d">&#8710</span>)/(2<span class="a">a</span>), X<sub>2</sub> = (-<span class="b">b</span> - i&#8730<span class="d">&#8710</span>)/(2<span class="a">a</span>)<br>
+</div>
+<p id="italic"> <span id="Exp">Example</span> :<br><br>2X<sup>2</sup> + 10X + 3 = 0, X<sub>1</sub> ? and X<sub>2</sub> ?</p>
+<fieldset>
+<legend>Solutions of polynomial function f(X) 2nd degree</legend>
+<form name="f1">
+Enter coefficients :<br>
+<label><span class="a">a</span></label>
+<input name="a" type="text"><br>
+<label><span class="b">b</span></label>
+<input name="b" type="text"><br>
+<label><span class="c">c</span></label>
+<input name="c" type="text"><br>
+<input id="but" type="button" value="Calculate X1,X2" Onclick="calculDelta()">
+</form>
+</fieldset><br>
+Result :
+<p id="result"></p>
+<p id="graph">Graph :</p>
+<svg width ="420" height="260" viewbox="-60 -130 120 260">
+<line y1="130" y2="-130"/>
+<line x1="-210" x2="210"/>
+<circle cx="-3"/>
+<circle cx="-46"/>
+<circle cx="-25" cy="95"/>
+<circle cx="-35" cy="75"/>
+<circle cx="-15" cy="75"/>
+<circle cx="-55" cy="-85"/>
+<circle cx="5" cy="-85"/>
+</svg>
+</body>
+</html>
